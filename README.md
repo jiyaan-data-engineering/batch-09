@@ -23,7 +23,11 @@ This project demonstrates a production-grade data pipeline that:
 
 ## Architecture
 
-![Architecture Diagram](Architecture.png)
+![Architecture Diagram](architecture.svg)
+
+**View diagrams:**
+- [Interactive SVG Diagram](architecture.svg) - Scalable vector graphics
+- [Mermaid Diagram](architecture-diagram.md) - Detailed flow visualization
 
 ## End-to-End Flow
 
@@ -153,7 +157,9 @@ cricket-stat-data-engineering-project/
 ├── udf.js                         # Data transformation function
 ├── requirements.txt               # Python dependencies
 ├── batsmen_rankings.csv          # Sample data output
-├── Architecture.png              # Pipeline architecture diagram
+├── architecture.svg              # Pipeline architecture diagram (SVG)
+├── architecture-diagram.md       # Architecture diagram (Mermaid)
+├── Architecture.png              # Pipeline architecture (legacy)
 ├── Looker.png                    # Dashboard screenshot
 └── README.md                     # This file
 ```

@@ -1,0 +1,162 @@
+<svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="700" fill="url(#bgGradient)"/>
+
+  <!-- Title -->
+  <text x="600" y="35" font-size="28" font-weight="bold" text-anchor="middle" fill="#1f2937">
+    Cricket Statistics Data Pipeline Architecture
+  </text>
+
+  <!-- ===== LAYER 1: DATA SOURCE ===== -->
+  <!-- Cricbuzz API -->
+  <rect x="50" y="80" width="180" height="100" rx="8" fill="#4F46E5" filter="url(#shadow)"/>
+  <text x="140" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Cricbuzz API</text>
+  <text x="140" y="135" font-size="12" text-anchor="middle" fill="white">ODI Rankings</text>
+  <text x="140" y="155" font-size="11" text-anchor="middle" fill="#E0E7FF">RapidAPI</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 230 130 L 280 130" stroke="#4F46E5" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="255" y="120" font-size="11" fill="#4F46E5" text-anchor="middle">extract_and_push_gcs.py</text>
+
+  <!-- ===== LAYER 2: STORAGE ===== -->
+  <!-- Google Cloud Storage -->
+  <rect x="280" y="80" width="180" height="100" rx="8" fill="#F59E0B" filter="url(#shadow)"/>
+  <text x="370" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Google Cloud</text>
+  <text x="370" y="130" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Storage (GCS)</text>
+  <text x="370" y="155" font-size="11" text-anchor="middle" fill="#FFFBEB">bkt-ranking-data/</text>
+
+  <!-- Arrow 2 -->
+  <path d="M 460 130 L 510 130" stroke="#F59E0B" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="485" y="120" font-size="11" fill="#F59E0B" text-anchor="middle">file upload event</text>
+
+  <!-- ===== LAYER 3: TRIGGERING ===== -->
+  <!-- Cloud Function -->
+  <rect x="510" y="80" width="180" height="100" rx="8" fill="#EC4899" filter="url(#shadow)"/>
+  <text x="600" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Cloud Function</text>
+  <text x="600" y="130" font-size="12" text-anchor="middle" fill="white">Event Trigger</text>
+  <text x="600" y="155" font-size="11" text-anchor="middle" fill="#FCE7F3">function.py</text>
+
+  <!-- Arrow 3 -->
+  <path d="M 690 130 L 740 130" stroke="#EC4899" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="715" y="120" font-size="11" fill="#EC4899" text-anchor="middle">launch job</text>
+
+  <!-- ===== LAYER 4: PROCESSING ===== -->
+  <!-- Dataflow -->
+  <rect x="740" y="80" width="180" height="100" rx="8" fill="#10B981" filter="url(#shadow)"/>
+  <text x="830" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Google Dataflow</text>
+  <text x="830" y="130" font-size="12" text-anchor="middle" fill="white">GCS_Text_to_BQ</text>
+  <text x="830" y="155" font-size="11" text-anchor="middle" fill="#D1FAE5">ETL Pipeline</text>
+
+  <!-- Arrow 4 -->
+  <path d="M 920 130 L 970 130" stroke="#10B981" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="945" y="120" font-size="11" fill="#10B981" text-anchor="middle">load data</text>
+
+  <!-- ===== LAYER 5: DATA WAREHOUSE ===== -->
+  <!-- BigQuery -->
+  <rect x="970" y="80" width="180" height="100" rx="8" fill="#8B5CF6" filter="url(#shadow)"/>
+  <text x="1060" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Google BigQuery</text>
+  <text x="1060" y="130" font-size="12" text-anchor="middle" fill="white">Data Warehouse</text>
+  <text x="1060" y="155" font-size="11" text-anchor="middle" fill="#EDE9FE">icc_odi_batsman</text>
+
+  <!-- ===== BOTTOM ROW: SUPPORTING COMPONENTS ===== -->
+
+  <!-- Schema Definition -->
+  <rect x="50" y="250" width="160" height="90" rx="8" fill="#06B6D4" filter="url(#shadow)"/>
+  <text x="130" y="275" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Schema</text>
+  <text x="130" y="295" font-size="11" text-anchor="middle" fill="#CFFAFE">bq.json</text>
+  <text x="130" y="315" font-size="10" text-anchor="middle" fill="white">(rank, name, country)</text>
+
+  <!-- Arrow to Dataflow -->
+  <path d="M 130 340 L 830 180" stroke="#06B6D4" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+  <!-- UDF Transformation -->
+  <rect x="250" y="250" width="160" height="90" rx="8" fill="#06B6D4" filter="url(#shadow)"/>
+  <text x="330" y="275" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Transformation</text>
+  <text x="330" y="295" font-size="11" text-anchor="middle" fill="#CFFAFE">udf.js</text>
+  <text x="330" y="315" font-size="10" text-anchor="middle" fill="white">CSV to JSON</text>
+
+  <!-- Arrow to Dataflow -->
+  <path d="M 330 340 L 830 180" stroke="#06B6D4" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+  <!-- Airflow DAG (Optional) -->
+  <rect x="450" y="250" width="160" height="90" rx="8" fill="#14B8A6" filter="url(#shadow)"/>
+  <text x="530" y="275" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Orchestration</text>
+  <text x="530" y="295" font-size="11" text-anchor="middle" fill="#CCFBF1">Apache Airflow</text>
+  <text x="530" y="315" font-size="10" text-anchor="middle" fill="white">dag.py (@daily)</text>
+
+  <!-- Arrow from Airflow to API -->
+  <path d="M 530 250 L 140 180" stroke="#14B8A6" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+  <!-- Metadata Storage -->
+  <rect x="650" y="250" width="160" height="90" rx="8" fill="#06B6D4" filter="url(#shadow)"/>
+  <text x="730" y="275" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Metadata</text>
+  <text x="730" y="295" font-size="11" text-anchor="middle" fill="#CFFAFE">bkt-dataflow-metadata/</text>
+  <text x="730" y="315" font-size="10" text-anchor="middle" fill="white">Config & Temp</text>
+
+  <!-- Arrow to Dataflow -->
+  <path d="M 730 340 L 830 180" stroke="#06B6D4" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+  <!-- Visualization -->
+  <rect x="850" y="250" width="160" height="90" rx="8" fill="#F97316" filter="url(#shadow)"/>
+  <text x="930" y="275" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Visualization</text>
+  <text x="930" y="295" font-size="11" text-anchor="middle" fill="#FFEDD5">Looker Studio</text>
+  <text x="930" y="315" font-size="10" text-anchor="middle" fill="white">Live Dashboard</text>
+
+  <!-- Arrow from BigQuery to Looker -->
+  <path d="M 1060 180 L 930 250" stroke="#F97316" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- ===== FLOW DESCRIPTION ===== -->
+  <!-- Step numbers and descriptions -->
+  <text x="50" y="420" font-size="14" font-weight="bold" fill="#1f2937">Data Flow Steps:</text>
+
+  <circle cx="65" cy="455" r="8" fill="#4F46E5"/>
+  <text x="85" y="460" font-size="12" fill="#1f2937"><tspan font-weight="bold">Step 1:</tspan> Extract ODI Rankings from Cricbuzz API</text>
+
+  <circle cx="65" cy="485" r="8" fill="#F59E0B"/>
+  <text x="85" y="490" font-size="12" fill="#1f2937"><tspan font-weight="bold">Step 2:</tspan> Upload CSV to Google Cloud Storage</text>
+
+  <circle cx="65" cy="515" r="8" fill="#EC4899"/>
+  <text x="85" y="520" font-size="12" fill="#1f2937"><tspan font-weight="bold">Step 3:</tspan> Cloud Function triggered on file upload</text>
+
+  <circle cx="65" cy="545" r="8" fill="#10B981"/>
+  <text x="85" y="550" font-size="12" fill="#1f2937"><tspan font-weight="bold">Step 4:</tspan> Dataflow job transforms CSV to JSON</text>
+
+  <circle cx="65" cy="575" r="8" fill="#8B5CF6"/>
+  <text x="85" y="580" font-size="12" fill="#1f2937"><tspan font-weight="bold">Step 5:</tspan> Load transformed data to BigQuery</text>
+
+  <circle cx="65" cy="605" r="8" fill="#F97316"/>
+  <text x="85" y="610" font-size="12" fill="#1f2937"><tspan font-weight="bold">Step 6:</tspan> Looker Studio visualizes live data</text>
+
+  <!-- Arrow markers definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4F46E5"/>
+    </marker>
+  </defs>
+
+  <!-- Key Technologies -->
+  <text x="700" y="420" font-size="14" font-weight="bold" fill="#1f2937">Technologies:</text>
+
+  <rect x="700" y="440" width="480" height="160" rx="8" fill="white" stroke="#d1d5db" stroke-width="1" filter="url(#shadow)"/>
+
+  <text x="720" y="465" font-size="11" fill="#1f2937"><tspan font-weight="bold">Data Source:</tspan> Cricbuzz API (RapidAPI)</text>
+  <text x="720" y="490" font-size="11" fill="#1f2937"><tspan font-weight="bold">Storage:</tspan> Google Cloud Storage (GCS)</text>
+  <text x="720" y="515" font-size="11" fill="#1f2937"><tspan font-weight="bold">Processing:</tspan> Google Cloud Dataflow (Apache Beam)</text>
+  <text x="720" y="540" font-size="11" fill="#1f2937"><tspan font-weight="bold">Data Warehouse:</tspan> Google BigQuery</text>
+  <text x="720" y="565" font-size="11" fill="#1f2937"><tspan font-weight="bold">Visualization:</tspan> Looker Studio</text>
+  <text x="720" y="590" font-size="11" fill="#1f2937"><tspan font-weight="bold">Orchestration:</tspan> Apache Airflow / Cloud Functions</text>
+
+  <!-- Footer -->
+  <text x="600" y="685" font-size="10" text-anchor="middle" fill="#6b7280">Cricket Statistics Data Engineering Pipeline | Google Cloud Platform</text>
+</svg>
